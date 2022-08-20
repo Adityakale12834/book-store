@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+# Book Store using React and Tailwind (Mobile-Friendly)🏭
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![GitHub](https://img.shields.io/github/license/ahmedsanad88/TechHome-landing-page)
 
-## Available Scripts
+React UI for a book shop web app using Tailwind, Redux, and React Router DOM that introduces the following features:
 
-In the project directory, you can run:
+> fetching data and displaying it using Pagination.
+> Using Redux and redux Thunk to manage the overall state of the app.
+> apply client-side routing using react-router-dom.
+> Adding a separate page to know more about any book.
+> And much more... Feel free to check the live link that will be added once deployed.
 
-### `npm start`
+> Thanks for [gutendex](https://gutendex.com/) 💚
+>
+> > Your API make that happen.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+> Thanks for [heroicons](https://heroicons.com/) 💙
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Demo-Preview👨🏽‍🏫
 
-### `npm test`
+> Demo will be added soon.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Table of contents🗂
 
-### `npm run build`
+- [Book Store using React and Tailwind (Mobile-Friendly)🏭](#book-store-using-react-and-tailwind-mobile-friendly)
+- [Demo-Preview👨🏽‍🏫](#demo-preview)
+- [Table of contents🗂](#table-of-contents)
+- [Functionality💡](#functionality)
+- [disclaimer🔴](#disclaimer)
+- [Installation⚙️](#installation️)
+- [Development🛠](#development)
+- [Contribute🤝](#contribute)
+- [License🧾](#license)
+- [Footer💐](#footer)
+- [Author❤️](#author️)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Functionality💡
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Technology Used:
+  - React.js
+  - Tailwindcss
+  - Axios
+  - Redux
+  - Redux-thunk
+  - Postcss
+  - Autoprefixer
+- General Info:
+  - Dynamic Navbar.
+  - More interactive site.
+  - Responsive Design.
+  - Using public API [gutendex](https://gutendex.com/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# disclaimer🔴
 
-### `npm run eject`
+> This project is still under building process.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Installation⚙️
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> Use the package manager [npm] to install All dependencies.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+> Run Project
 
-## Learn More
+```bash
+npm run start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[(Back to top)](#table-of-contents)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Development🛠
 
-### Code Splitting
+> Project is used a grows structure that can be used as a fundamental structure for advanced one.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+[(Back to top)](#table-of-contents)
 
-### Analyzing the Bundle Size
+# Contribute🤝
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-### Making a Progressive Web App
+Please make sure to update tests as appropriate.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+[(Back to top)](#table-of-contents)
 
-### Advanced Configuration
+# License🧾
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+[MIT](https://choosealicense.com/licenses/mit/)
 
-### Deployment
+[(Back to top)](#table-of-contents)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+# Footer💐
 
-### `npm run build` fails to minify
+Leave a star on GitHub, give a clap on Medium and share this guide if you found this helpful.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[(Back to top)](#table-of-contents)
+
+# Author❤️
+
+`Ahmed Sanad`
+
+[(Back to top)](#table-of-contents)
