@@ -28,6 +28,7 @@ React UI for a book shop web app using Tailwind, Redux, and React Router DOM tha
 - [Functionality💡](#functionality)
 - [disclaimer🔴](#disclaimer)
 - [Installation⚙️](#installation️)
+- [All dependencies](#all-dependencies)
 - [Development🛠](#development)
 - [Contribute🤝](#contribute)
 - [License🧾](#license)
@@ -66,6 +67,25 @@ npm install
 
 ```bash
 npm run start
+```
+
+[(Back to top)](#table-of-contents)
+
+# All dependencies
+
+```javascript
+  "dependencies": {
+    "@headlessui/react": "^1.6.6",
+    "@heroicons/react": "^1.0.6",
+    "axios": "^0.27.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.2",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.1",
+  }
 ```
 
 [(Back to top)](#table-of-contents)

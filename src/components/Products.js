@@ -37,7 +37,7 @@ export default function Products() {
         </h2>
 
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {books.length &&
+          {books.length ? (
             books.map((book) => (
               <div
                 key={book.id}
@@ -81,7 +81,12 @@ export default function Products() {
                   </div>
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className="flex justify-center items-center">
+              <p className="text-sm text-indigo">Waiting for data...</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,6 +1,28 @@
 import { SearchIcon } from "@heroicons/react/outline";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import { getSearchingResults } from "../actions/products";
 
 export default function Search() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const searchForBook = () => {
+    const searchInputValue = document.getElementById("search").value.trim();
+    if (searchInputValue) {
+      navigate(`/search`);
+      dispatch(getSearchingResults(searchInputValue));
+    }
+  };
+
+  const handleChange = (e) => {
+    // keyCode: 13
+    if (e.keyCode === 13) {
+      searchForBook();
+    }
+  };
+
   return (
     <div className="relative bg-white">
       <div className="bg-white max-w-7xl mx-auto px-4 sm:px-6 z-40">
@@ -13,11 +35,13 @@ export default function Search() {
                 name="search"
                 id="search"
                 placeholder="Search by author, title, name"
+                onKeyDown={(e) => handleChange(e)}
               />
               <div className="flex-shrink-0 absolute left-0 h-full w-12">
                 <button
                   type="button"
                   className="flex w-full h-full bg-indigo hover:bg-dark-indigo items-center justify-center focus:outline-none focus:ring-2 focus:ring-white"
+                  onClick={searchForBook}
                 >
                   <span className="sr-only">Search</span>
                   <SearchIcon

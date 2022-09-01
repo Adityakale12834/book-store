@@ -38,3 +38,16 @@ export const getSingleBook = (id) => async (dispatch) => {
     console.log(`ERROR: ${error}`);
   }
 };
+
+// Searching for books
+export const getSearchingResults = (q) => async (dispatch) => {
+  try {
+    dispatch({ type: "START_LOADING" });
+    const { data } = await api.fetchSearchingResults(q);
+    // console.log(data);
+    dispatch({ type: "FETCH_ALL", payload: data });
+    dispatch({ type: "END_LOADING" });
+  } catch (error) {
+    console.log(`ERROR: ${error}`);
+  }
+};

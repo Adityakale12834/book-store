@@ -31,7 +31,11 @@ export default function Pagination() {
 
   const goToPage = () => {
     const pageValue = Number(document.getElementById("page-num").value);
-    dispatch(getBooks(pageValue));
+    if (pageValue >= 1 && pageValue <= 2000) {
+      dispatch(getBooks(pageValue));
+    } else {
+      alert("Please use a number between 1 and 2000");
+    }
   };
 
   return (
@@ -52,7 +56,7 @@ export default function Pagination() {
           </button>
         </div>
         <div className="hidden lg:flex-1 lg:flex lg:items-center lg:justify-between">
-          {currentPage ? (
+          {currentPage && currentPage > 0 ? (
             <div>
               <p className="text-sm text-indigo">
                 Showing{" "}

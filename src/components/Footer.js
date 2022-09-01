@@ -35,7 +35,7 @@ const Footer = () => {
               Privacy Policy
             </p>
           </div>
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center mb-6">
             <p className="text-md text-midnight hover:text-indigo hover:underline cursor-pointer">
               Help & Support
             </p>
