@@ -15,7 +15,7 @@ import Navbar from "./Navbar";
 
 const Product = () => {
   const { id } = useParams();
-  const { isLoading, chosenBook } = useSelector((state) => state.books);
+  const { chosenBook } = useSelector((state) => state.books);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,10 +30,6 @@ const Product = () => {
     dispatch({ type: "REMOVE_TO_CART", payload: id });
   };
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
   return (
     <div>
       <Navbar />
@@ -42,9 +38,9 @@ const Product = () => {
           {chosenBook ? (
             <div
               key={chosenBook.id}
-              className="lg:w-1/2 lg:mx-auto group relative bg-light-gray px-4 py-2 rounded-md shadow-md cursor-pointer"
+              className="lg:w-1/2 lg:mx-auto group relative bg-light-brown px-4 py-2 rounded-md shadow-md"
             >
-              <div className="w-full min-h-80 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+              <div className="w-full min-h-80 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80 lg:aspect-none">
                 <img
                   src={chosenBook.formats["image/jpeg"]}
                   alt={chosenBook.title}
@@ -53,32 +49,46 @@ const Product = () => {
               </div>
               <div className="mt-6 flex flex-col items-start justify-center">
                 <div className="mb-6 lg:mb-10">
-                  <h3 className="text-sm text-dark-gray">{chosenBook.title}</h3>
+                  <h3 className="text-sm font-semibold text-dark-gray">
+                    {chosenBook.title}
+                  </h3>
                   {chosenBook.authors.map((author, i) => (
-                    <p key={i} className="mt-1 text-sm text-indigo">
+                    <p key={i} className="mt-1 text-sm text-dark-indigo">
                       {author.name}
                     </p>
                   ))}
                 </div>
                 <div className="mb-6">
                   <div className="flex flex-row items-center justify-start mb-2 flex-wrap">
-                    <h3 className="text-sm text-indigo">Languages:</h3>
-                    <p className="text-dark-gray ml-4">
+                    <h3 className="text-sm font-medium text-dark-indigo">
+                      Languages:
+                    </h3>
+                    <p className="text-dark-gray ml-2">
                       {chosenBook.languages.join("-").toUpperCase()}
                     </p>
                   </div>
                   <div className="mb-2">
-                    <h3 className="text-sm text-indigo">Bookshelves:</h3>
+                    <h3 className="text-sm font-medium text-dark-indigo">
+                      Bookshelves:
+                    </h3>
                     <ul className="list-disc ml-6">
-                      {chosenBook.bookshelves.map((shelve, i) => (
-                        <li key={i} className="mt-1 text-sm text-dark-gray">
-                          {shelve}
+                      {chosenBook.bookshelves.length > 0 ? (
+                        chosenBook.bookshelves.map((shelve, i) => (
+                          <li key={i} className="mt-1 text-sm text-dark-gray">
+                            {shelve}
+                          </li>
+                        ))
+                      ) : (
+                        <li className="mt-1 text-sm text-dark-gray">
+                          No Bookshelves Available
                         </li>
-                      ))}
+                      )}
                     </ul>
                   </div>
                   <div className="mb-2">
-                    <h3 className="text-sm text-indigo">Subjects:</h3>
+                    <h3 className="text-sm font-medium text-dark-indigo">
+                      Subjects:
+                    </h3>
                     <ul className="list-disc ml-6">
                       {chosenBook.subjects.map((sub, i) => (
                         <li key={i} className="mt-1 text-sm text-dark-gray">
@@ -89,7 +99,7 @@ const Product = () => {
                   </div>
                 </div>
                 <p className="text-sm font-medium text-midnight flex flex-row justify-center items-center mb-6 lg:mb-10">
-                  <span className="text-sm text-indigo mr-4">
+                  <span className="text-sm text-dark-indigo mr-2">
                     Download Count:
                   </span>
                   {chosenBook["download_count"]}
@@ -126,7 +136,9 @@ const Product = () => {
               </div>
             </div>
           ) : (
-            <div>Waiting...</div>
+            <div>
+              <Loader />
+            </div>
           )}
         </div>
       </div>

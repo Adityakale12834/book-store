@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PlusIcon, MinusIcon } from "@heroicons/react/outline";
 
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Loader from "../components/Loader";
 import Search from "../components/Search";
+import { getSearchingResults } from "../actions/products";
+import Pagination from "../components/Pagination";
 
 const SearchPage = () => {
   const { books, isLoading } = useSelector((state) => state.books);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { q } = useParams();
+
+  useEffect(() => {
+    let controller = true;
+    if (controller) {
+      dispatch(getSearchingResults(q));
+    }
+
+    return () => {
+      controller = false;
+    };
+  }, [dispatch, q]);
 
   const handleAddToCart = (book, e) => {
     e.stopPropagation();
@@ -28,9 +42,11 @@ const SearchPage = () => {
       <Navbar />
       <Search />
       {isLoading ? (
-        <Loader />
+        <div className="bg-white pt-48">
+          <Loader />
+        </div>
       ) : (
-        <div className="bg-white">
+        <div className="bg-white pt-48">
           <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
             <h2 className="text-2xl font-bold tracking-tight text-dark-gray">
               Search {books.length > 1 ? "Results" : "Result"}
@@ -91,6 +107,7 @@ const SearchPage = () => {
           </div>
         </div>
       )}
+      <Pagination showSetPage={false} />
       <Footer />
     </div>
   );

@@ -11,7 +11,7 @@ export default function Search() {
   const searchForBook = () => {
     const searchInputValue = document.getElementById("search").value.trim();
     if (searchInputValue) {
-      navigate(`/search`);
+      navigate(`/search/${searchInputValue}`);
       dispatch(getSearchingResults(searchInputValue));
     }
   };
@@ -24,13 +24,13 @@ export default function Search() {
   };
 
   return (
-    <div className="relative bg-white">
-      <div className="bg-white max-w-7xl mx-auto px-4 sm:px-6 z-40">
-        <div className="mx-auto py-3 px-3 sm:px-6 lg:px-8">
+    <div className="relative">
+      <div className="bg-white max-w-7xl mx-auto px-4 sm:px-6 z-40 fixed top-20 left-0 right-0">
+        <div className="mx-auto py-3 pt-6 px-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between flex-wrap">
             <div className="bg-light-gray w-0 flex-1 flex items-center relative rounded-md overflow-hidden shadow-md">
               <input
-                className="w-full p-2 pl-14 bg-inherit text-midnight text-lg outline-indigo border-none"
+                className="w-full p-2 pl-14 bg-inherit text-midnight text-lg border border-white hover:border hover:border-indigo focus:outline-none focus:ring focus:ring-indigo rounded-md"
                 type="text"
                 name="search"
                 id="search"

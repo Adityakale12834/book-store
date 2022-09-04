@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <div className="relative bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col justify-center items-start">
-        <div className="flex flex-col justify-center items-center lg:flex-row w-full lg:justify-evenly">
+        <div className="flex flex-col justify-center items-center lg:flex-row w-full lg:justify-evenly pt-16 border-t-2 border-light-gray">
           <div className="flex flex-col justify-center items-center mb-6">
             <p className="text-md text-midnight hover:text-indigo hover:underline cursor-pointer">
               About us

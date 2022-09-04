@@ -1,26 +1,24 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PlusIcon, MinusIcon } from "@heroicons/react/outline";
-import Loader from "../components/Loader";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { isLoading, cart } = useSelector((state) => state.books);
+  const { cart } = useSelector((state) => state.books);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleRemoveFromCart = (id) => {
+  const handleRemoveFromCart = (e, id) => {
+    e.stopPropagation();
     dispatch({ type: "REMOVE_TO_CART", payload: id });
   };
-
-  if (isLoading) {
-    return <Loader />;
-  }
 
   return (
     <div>
       <Navbar />
-      <div className="bg-white">
+      <div className="bg-white min-h-screen pt-48">
         <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-dark-gray">
             Check Your Cart
@@ -31,7 +29,8 @@ const Cart = () => {
               cart.map((book) => (
                 <div
                   key={book.id}
-                  className="group relative bg-light-gray px-4 py-2 rounded-md shadow-md cursor-pointer"
+                  className="group relative bg-light-brown px-4 py-2 rounded-md shadow-md cursor-pointer"
+                  onClick={() => navigate(`/books/${book.id}`)}
                 >
                   <div className="w-full min-h-80 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
                     <img
@@ -42,7 +41,7 @@ const Cart = () => {
                   </div>
                   <div className="mt-4 flex justify-between">
                     <div>
-                      <h3 className="text-sm text-dark-gray">
+                      <h3 className="text-sm text-dark-gray font-semibold">
                         {book.title.split(":")[0]}
                       </h3>
                       {book.authors.map((author, i) => (
@@ -61,7 +60,7 @@ const Cart = () => {
                       </button>
                       <button
                         className="inline-flex items-center px-2 py-2 rounded-full bg-red-600 text-sm font-medium text-white hover:bg-red-800"
-                        onClick={() => handleRemoveFromCart(book.id)}
+                        onClick={(e) => handleRemoveFromCart(e, book.id)}
                       >
                         <span className="sr-only">Remove from cart</span>
                         <MinusIcon className="h-5 w-5" aria-hidden="true" />

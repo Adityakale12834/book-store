@@ -31,7 +31,7 @@ function App() {
 
           <Route exact path="/bestseller" element={<Bestseller />} />
           <Route exact path="/favorite" element={<Favorite />} />
-          <Route exact path="/search" element={<SearchPage />} />
+          <Route exact path="/search/:q" element={<SearchPage />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/about" element={<About />} />
           <Route exact path="/blog" element={<Blog />} />

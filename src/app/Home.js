@@ -12,8 +12,8 @@ const Home = () => {
       <Navbar />
       <Search />
       <Banner />
-      <Pagination />
       <Products />
+      <Pagination showSetPage={true} />
       <Footer />
     </div>
   );

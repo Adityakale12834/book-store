@@ -6,7 +6,7 @@ const Favorite = () => {
   return (
     <div>
       <Navbar />
-      <div className="w-full h-screen bg-white text-indigo text-2xl text-center p-20">
+      <div className="w-full h-screen bg-white text-indigo text-2xl text-center p-20 pt-48">
         Favorite
       </div>
       <Footer />

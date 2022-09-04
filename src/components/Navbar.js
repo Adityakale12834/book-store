@@ -51,7 +51,7 @@ export default function Navbar() {
 
   return (
     <Popover className="relative bg-white z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 fixed top-0 left-0 right-0 bg-white">
         <div className="flex justify-between items-center border-b-2 border-light-gray py-6 lg:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link to="/">
