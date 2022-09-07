@@ -57,7 +57,7 @@ const SearchPage = () => {
                 books.map((book) => (
                   <div
                     key={book.id}
-                    className="group relative bg-light-gray px-4 py-2 rounded-md shadow-md cursor-pointer"
+                    className="group relative bg-light-brown px-4 py-2 rounded-md shadow-md cursor-pointer"
                     onClick={() => navigate(`/books/${book.id}`)}
                   >
                     <div className="w-full min-h-80 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">

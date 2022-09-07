@@ -34,7 +34,7 @@ const Product = () => {
     <div>
       <Navbar />
       <div className="bg-white py-10 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-48">
           {chosenBook ? (
             <div
               key={chosenBook.id}
