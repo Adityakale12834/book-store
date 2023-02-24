@@ -1,4 +1,4 @@
-# Book Store using React and Tailwind (Mobile-Friendly)🏭
+# Book Store using React and Tailwind (Mobile-Friendly)📚
 
 ![GitHub](https://img.shields.io/github/license/ahmedsanad88/Book-Store-using-React-and-Tailwind)
 <br />
@@ -10,6 +10,8 @@ React UI for a book shop web app using Tailwind, Redux, and React Router DOM tha
 > Using Redux and redux Thunk to manage the overall state of the app.
 > apply client-side routing using react-router-dom.
 > Adding a separate page to know more about any book.
+> Searching added to the app.
+> Prepare content that required for the remaining pages.
 > And much more... Feel free to check the live link that will be added once deployed.
 
 > Thanks for [gutendex](https://gutendex.com/) 💚
