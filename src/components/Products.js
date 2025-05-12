@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getBooks } from "../actions/products";
 import AboutUs from "./AboutUs";
 import Footer from "./Footer";
+import Loader from "./Loader";
 
 // SVG Icons
 const PlusIcon = () => (
@@ -59,7 +60,7 @@ const ShoppingCartIcon = () => (
 
 export default function Products() {
   const { books, isLoading } = useSelector((state) => state.books);
-  const cart = useSelector((state) => state.cart || []);
+  const { cart } = useSelector((state) => state.books);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -69,20 +70,26 @@ export default function Products() {
 
   const handleAddToCart = (book, e) => {
     e.stopPropagation();
+    // Use the book with pre-assigned prices from state
     dispatch({ type: "ADD_TO_CART", payload: book });
   };
 
-  const handleRemoveFromCart = (id, e) => {
-    e.stopPropagation();
-    dispatch({ type: "REMOVE_FROM_CART", payload: id });
+  const handleQuantityChange = (id, newQuantity) => {
+    if (newQuantity < 1) return;
+    dispatch({
+      type: "UPDATE_QUANTITY",
+      payload: { id, quantity: newQuantity },
+    });
   };
 
   const isInCart = (id) => cart.some((item) => item.id === id);
+  const getQuantity = (id) =>
+    cart.find((item) => item.id === id)?.quantity || 0;
 
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Banner */}
-      <div className="bg-gradient-to-r from-indigo-900 to-purple-800 text-white py-20 px-4">
+      <div className="bg-gradient-to-r from-indigo-900 to-purple-800 text-white py-10 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Discover Your Next Favorite Book
@@ -96,135 +103,122 @@ export default function Products() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Filter/Search Bar */}
         <div className="mb-12 flex flex-col md:flex-row justify-between items-center gap-4">
           <h2 className="text-3xl font-bold text-gray-900">Our Collection</h2>
-          {/* <div className="relative w-full md:w-64">
-            <input
-              type="text"
-              placeholder="Search books..."
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
-            <svg
-              className="absolute right-3 top-2.5 h-5 w-5 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          <div className="relative">
+            <button
+              onClick={() => navigate("/cart")}
+              className="flex items-center text-gray-700 hover:text-indigo-600"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </div> */}
+              <ShoppingCartIcon className="h-6 w-6 mr-1" />
+              <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                {cart.reduce((total, item) => total + item.quantity, 0)}
+              </span>
+            </button>
+          </div>
         </div>
 
         {/* Book Grid */}
         {isLoading ? (
           <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+            <Loader />
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {books.length ? (
-              books.map((book) => (
-                <div
-                  key={book.id}
-                  className="bg-white hover:scale-105 transition ease-in-out  border p-1 rounded-xl shadow-md overflow-hidden hover:shadow-xl duration-300 group"
-                >
-                  {/* Book Cover */}
-                  <div
-                    className="relative h-64 overflow-hidden cursor-pointer"
-                    onClick={() => navigate(`/books/${book.id}`)}
-                  >
-                    <img
-                      src={book.formats["image/jpeg"]}
-                      alt={book.title}
-                      className="w-full h-full object-cover rounded-lg hover:rounded-lg transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                    {isInCart(book.id) && (
-                      <div className="absolute top-3 left-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                        In Cart
-                      </div>
-                    )}
-                  </div>
+              books.map((book) => {
+                const quantity = getQuantity(book.id);
 
-                  {/* Book Details */}
-                  <div className="p-4">
-                    <h3
-                      className="text-lg font-bold text-gray-900 mb-1 truncate cursor-pointer"
+                return (
+                  <div
+                    key={book.id}
+                    className="bg-white hover:scale-105 transition ease-in-out border p-1 rounded-xl shadow-md overflow-hidden hover:shadow-xl duration-300 group"
+                  >
+                    {/* Book Cover */}
+                    <div
+                      className="relative h-64 overflow-hidden cursor-pointer"
                       onClick={() => navigate(`/books/${book.id}`)}
                     >
-                      {book.title.split(":")[0]}
-                    </h3>
-                    <div className="flex flex-wrap gap-1 mb-3">
-                      {book.authors.slice(0, 2).map((author, i) => (
-                        <span
-                          key={i}
-                          className="text-xs font-medium px-2 py-1 bg-indigo-100 text-indigo-800 rounded-full"
-                        >
-                          {author.name}
-                        </span>
-                      ))}
+                      <img
+                        src={book.formats["image/jpeg"]}
+                        alt={book.title}
+                        className="w-full h-full object-cover rounded-lg hover:rounded-lg transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                      {quantity > 0 && (
+                        <div className="absolute top-3 left-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                          {quantity} in cart
+                        </div>
+                      )}
                     </div>
 
-                    {/* Action Buttons */}
-                    <div className="flex justify-between items-center mt-4">
-                      <span className="text-sm text-gray-500">
-                        {book.bookshelves[0] || "Fiction"}
-                      </span>
-                      <div className="flex space-x-2">
-                        {isInCart(book.id) ? (
-                          <button
-                            className="p-2 bg-red-100 text-red-600 rounded-full hover:bg-red-200 transition-colors"
-                            onClick={(e) => handleRemoveFromCart(book.id, e)}
-                            title="Remove from cart"
+                    {/* Book Details */}
+                    <div className="p-4">
+                      <h3
+                        className="text-lg font-bold text-gray-900 mb-1 truncate cursor-pointer"
+                        onClick={() => navigate(`/books/${book.id}`)}
+                      >
+                        {book.title.split(":")[0]}
+                      </h3>
+                      <div className="flex flex-wrap gap-1 mb-3">
+                        {book.authors.slice(0, 2).map((author, i) => (
+                          <span
+                            key={i}
+                            className="text-xs font-medium px-2 py-1 bg-indigo-100 text-indigo-800 rounded-full"
                           >
-                            <MinusIcon />
-                          </button>
+                            {author.name}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Price */}
+                      <div className="text-lg font-bold text-indigo-600 mb-3">
+                        ₹{book.priceINR}{" "}
+                        <span className="text-xs text-gray-500">
+                          (${book.priceUSD})
+                        </span>
+                      </div>
+
+                      {/* Quantity Controls */}
+                      <div className="flex items-center justify-between">
+                        {quantity > 0 ? (
+                          <div className="flex items-center space-x-2">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleQuantityChange(book.id, quantity - 1);
+                              }}
+                              className="p-1 bg-gray-200 rounded-full hover:bg-gray-300"
+                            >
+                              <MinusIcon className="h-4 w-4" />
+                            </button>
+                            <span className="font-medium">{quantity}</span>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleQuantityChange(book.id, quantity + 1);
+                              }}
+                              className="p-1 bg-gray-200 rounded-full hover:bg-gray-300"
+                            >
+                              <PlusIcon className="h-4 w-4" />
+                            </button>
+                          </div>
                         ) : (
                           <button
-                            className="p-2 bg-indigo-100 text-indigo-600 rounded-full hover:bg-indigo-200 transition-colors"
-                            onClick={(e) => handleAddToCart(book, e)}
-                            title="Add to cart"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleAddToCart(book, e);
+                            }}
+                            className="px-4 py-2 bg-indigo-600 text-white bg-midnight rounded-lg hover:bg-indigo-700 transition-colors"
                           >
-                            <PlusIcon />
+                            Add to Cart
                           </button>
                         )}
-                        <button
-                          className="p-2 bg-gray-100 text-gray-600 rounded-full hover:bg-gray-200 transition-colors"
-                          title="View details"
-                          onClick={() => navigate(`/books/${book.id}`)}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            className="h-5 w-5"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                            />
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                            />
-                          </svg>
-                        </button>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))
+                );
+              })
             ) : (
               <div className="col-span-full text-center py-12">
                 <svg
