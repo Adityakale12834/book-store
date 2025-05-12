@@ -80,14 +80,6 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <div className="flex flex-row justify-center items-center w-full mb-8 text-dark-gray">
-          <img
-            src={copyright}
-            className="object-cover h-5 w-5"
-            alt="facebook account"
-          />{" "}
-          <small>{year}</small> - <small>Ahmed Sanad</small>
-        </div>
       </div>
     </div>
   );

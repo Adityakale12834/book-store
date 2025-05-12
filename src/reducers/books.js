@@ -1,5 +1,11 @@
 const reducer = (
-  state = { isLoading: true, books: [], cart: [], chosenBook: null },
+  state = {
+    isLoading: true,
+    books: [],
+    cart: [],
+    chosenBook: null,
+    favorites: [],
+  },
   action
 ) => {
   switch (action.type) {
@@ -33,10 +39,28 @@ const reducer = (
         cart: !checkDub ? [...state.cart, action.payload] : [...state.cart],
       };
 
-    case "REMOVE_TO_CART":
+    case "REMOVE_FROM_CART":
       return {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
+      };
+
+    case "ADD_TO_FAVORITE":
+      const alreadyFavorite = state.favorites.some(
+        (item) => item.id === action.payload.id
+      );
+      if (alreadyFavorite) {
+        return state; // Don't modify state if already in favorites
+      }
+      return {
+        ...state,
+        favorites: [...state.favorites, action.payload],
+      };
+
+    case "REMOVE_FROM_FAVORITE":
+      return {
+        ...state,
+        favorites: state.favorites.filter((item) => item.id !== action.payload),
       };
 
     default:

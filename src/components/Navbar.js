@@ -47,20 +47,17 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const { cart } = useSelector((state) => state.books);
+  const { cart, favorites } = useSelector((state) => state.books);
 
   return (
     <Popover className="relative bg-white z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 fixed top-0 left-0 right-0 bg-white">
         <div className="flex justify-between items-center border-b-2 border-light-gray py-6 lg:justify-start md:space-x-10">
-          <div className="flex justify-start lg:w-0 lg:flex-1">
-            <Link to="/">
-              <span className="sr-only">Workflow</span>
-              <img className="h-8 w-auto sm:h-10" src={logo} alt="logo" />
-            </Link>
+          <div className="flex justify-start lg:w-0 lg:flex-1 text-gray-100 font-bold italic text-3xl">
+            <Link to="/">BookShop</Link>
           </div>
           <div className="-mr-2 -my-2 lg:hidden">
-            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-md-gray hover:text-dark-gray hover:bg-light-gray focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo">
+            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-md-gray hover:text-dark-gray hover:bg-light-gray focus:outline-none focus:ring-2 focus:ring-inset">
               <span className="sr-only">Open menu</span>
               <MenuIcon className="h-6 w-6" aria-hidden="true" />
             </Popover.Button>
@@ -73,7 +70,7 @@ export default function Navbar() {
               Bestseller
             </Link>
 
-            <Popover className="relative">
+            {/* <Popover className="relative">
               {({ open }) => (
                 <>
                   <Popover.Button
@@ -130,21 +127,29 @@ export default function Navbar() {
                   </Transition>
                 </>
               )}
-            </Popover>
+            </Popover> */}
 
-            <Link to="/about" className="nav-links nav-circle">
+            {/* <Link to="/about" className="nav-links nav-circle">
               Find a store
             </Link>
             <Link to="/blog" className="nav-links nav-circle">
               Blog
-            </Link>
+            </Link> */}
           </Popover.Group>
           <div className="hidden lg:flex items-center justify-end md:flex-1 lg:w-0">
             <Link
               to="/Favorite"
-              className="whitespace-nowrap text-base font-medium text-md-gray hover:text-indigo"
+              className="whitespace-nowrap relative flex flex-col justify-center items-center text-base font-medium text-md-gray hover:text-indigo"
             >
-              <HeartIcon className="flex-shrink-0 h-6 w-6" aria-hidden="true" />
+              <HeartIcon
+                className={`flex-shrink-0 ${
+                  favorites.length > 0
+                    ? "bg-red-500 rounded-full p-2 text-white h-10 w-10 hover:bg-red-600 hover:text-black hover:scale-105 transition"
+                    : "bg-white h-8 w-8 "
+                }`}
+                aria-hidden="true"
+              />
+              {/* <p className="absolute text-sm -top-4">{favorites.length}</p> */}
             </Link>
             <Link
               to="/cart"
@@ -152,18 +157,12 @@ export default function Navbar() {
             >
               {cart.length}
             </Link>
-            <button
-              href="#"
-              className="ml-8 whitespace-nowrap inline-flex items-center justify-center text-base font-medium text-md-gray hover:text-indigo"
-            >
-              EN
-            </button>
           </div>
         </div>
       </div>
 
       {/* Mobile and tablet view  */}
-      <Transition
+      {/* <Transition
         as={Fragment}
         enter="duration-200 ease-out"
         enterFrom="opacity-0 scale-95"
@@ -171,8 +170,8 @@ export default function Navbar() {
         leave="duration-100 ease-in"
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
-      >
-        <Popover.Panel
+      > */}
+      {/* <Popover.Panel
           focus
           className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden"
         >
@@ -247,8 +246,8 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-        </Popover.Panel>
-      </Transition>
+        </Popover.Panel> */}
+      {/* </Transition> */}
     </Popover>
   );
 }

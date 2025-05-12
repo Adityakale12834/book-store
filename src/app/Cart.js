@@ -29,7 +29,7 @@ const Cart = () => {
               cart.map((book) => (
                 <div
                   key={book.id}
-                  className="group relative bg-light-brown px-4 py-2 rounded-md shadow-md cursor-pointer"
+                  className="group relative bg-white px-4 py-2 rounded-lg shadow-2xl cursor-pointer hover:scale-105 transition duration-300 border border-gray-200"
                   onClick={() => navigate(`/books/${book.id}`)}
                 >
                   <div className="w-full min-h-80 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
@@ -51,13 +51,13 @@ const Cart = () => {
                       ))}
                     </div>
                     <div className="flex flex-col justify-center items-end ml-5">
-                      <button
+                      {/* <button
                         className="inline-flex items-center px-2 py-2 rounded-full opacity-25 bg-green-600 text-sm font-medium text-white hover:bg-green-800 mb-2"
                         disabled
                       >
                         <span className="sr-only">Add to cart</span>
                         <PlusIcon className="h-5 w-5" aria-hidden="true" />
-                      </button>
+                      </button> */}
                       <button
                         className="inline-flex items-center px-2 py-2 rounded-full bg-red-600 text-sm font-medium text-white hover:bg-red-800"
                         onClick={(e) => handleRemoveFromCart(e, book.id)}
@@ -78,7 +78,7 @@ const Cart = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

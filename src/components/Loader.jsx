@@ -3,7 +3,7 @@ import circles from "../assets/circles.svg";
 
 const Loader = () => {
   return (
-    <div className="w-full h-48 flex justify-center items-center">
+    <div className="w-full h-48 flex justify-center items-center ">
       <button
         type="button"
         className="bg-indigo-500 flex flex-col justify-center items-center"

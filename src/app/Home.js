@@ -11,10 +11,10 @@ const Home = () => {
     <div>
       <Navbar />
       <Search />
-      <Banner />
+      {/* <Banner /> */}
       <Products />
-      <Pagination showSetPage={true} />
-      <Footer />
+      {/* <Pagination showSetPage={true} /> */}
+      {/* <Footer /> */}
     </div>
   );
 };
